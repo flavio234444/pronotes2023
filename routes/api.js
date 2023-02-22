@@ -9,7 +9,7 @@ router.get('/author', (req, res)=>{
     res.json({
         "name": "Jose Ezequiel",
         "lasname": "Hernandez ",
-        "age": "22 years",
+        "age": "22 years"
     });
 });//function(req, res)
 
