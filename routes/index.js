@@ -3,9 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let iconSet = ["🧨","🎡","🧨",];
-  let chooseIcon = iconSet[Math.random()]
-  res.render('index', { title: 'DWPII-2023A' });
+  let iconSet=["🍷","🎡","🍕",];
+  let icon = iconSet[Math.floor(Math.random()*3)];
+  res.render('index', { title: 'DWPII-2023A', icon });
 });
 
 module.exports = router;
