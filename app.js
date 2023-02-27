@@ -16,12 +16,27 @@ var app = express();
 // view engine setup
 // We are declaring the localization of the views
 app.set('views', path.join(__dirname, 'views'));
+// Setting up the template engine
 app.set('view engine', 'hbs');
 
+//Registering midlewares
+//Log all received requests
 app.use(logger('dev'));
+/*app.use((req, res, next)=>{
+  console.log("👙We have receivend a request(Se ha recibido una petición)");
+  next();
+});
+app.use((req, res, next)=>{
+  console.log(`😞IP: ${req.ip}`);
+  console.log(`🎮METHOD: ${req.method}`);
+});*/
+// Parse request data into jason
 app.use(express.json());
+// Decode url info
 app.use(express.urlencoded({ extended: false }));
+// Parse client Cookies into json
 app.use(cookieParser());
+//Set up the static file server
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Registering routes
