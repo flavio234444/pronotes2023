@@ -1,0 +1,20 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",{
+                //los targets son las plataformas 
+                "targets" : {"node" : "current"}
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "module-resolver",{
+                "root": ["./"],
+                "alias":{
+                    "@server": "./server"
+                }
+            }
+        ]
+    ]
+}
