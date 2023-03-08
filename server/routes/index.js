@@ -1,8 +1,10 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+const { Router } = express;
+
+const router = Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next)=> {
   let iconSet=["🍷","🎡","🍕",];
   let icon = iconSet[Math.floor(Math.random()*3)];
   res.render('index', { title: 'DWPII-2023A', icon });
@@ -11,7 +13,7 @@ router.get('/', function(req, res, next) {
 router.get('/author', (req, res)=>{
   //Creating a View-Model
 
-  let author = {
+  const author = {
     "name": "Jose Ezequiel",
     "lastname": "Hernandez ",
     "age": "22 years"
@@ -22,4 +24,4 @@ res.render('Author',author);
 
 })
 
-module.exports = router;
+export default router;
