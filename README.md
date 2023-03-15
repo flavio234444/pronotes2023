@@ -14,7 +14,7 @@ databases the proyect will use MongoBD Technology, for template engine we will u
 ## Prooyect Note 
 1. [Project Creation](https://github.com/JoseLara55/projnotes-2023a-class/blob/main/Class%20notes/Project-%20Creation.md)
 
-2. Repository Creation
+2. [Respository Creation]((https://github.com/JoseLara55/projnotes-2023a-class/blob/main/Class%20notes/Repository%20Creation.md))
 
 3. Creating dedicated Backend directory
 
