@@ -1,6 +1,5 @@
-# Project Creation
-In this part of the project we crated the repository on GitHub and then we opend a Github
-Codespaces to modify and add new files to the project, the steps are described bellow. 
+# Creating dedicated Backend directory
+In this section we will talk about how we can make specific blocks of directories and how each one of them works according to how we place them. 
 
 ## Methods
  All:  Student will write this part
