@@ -3,7 +3,7 @@ Class project from  the FullStack Web Development
 Subject..
 
 ## About...
-**Author**[Hernandez Lara Jose Ezequiel]
+**Author**:[Hernandez Lara Jose Ezequiel]
 ----
 
 ## Proyect Stack
