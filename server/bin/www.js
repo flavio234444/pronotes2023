@@ -5,7 +5,7 @@
  */
 //Se importa en app la logica del servidor (Importing the server logic)
 //require importa codigo de otro archivo (is used )
-import app from '../../app';
+import app from '../app';
 //Se esta importando una dependecia externa (debug) 
 //Manda mensajes como una dependencia externa
 //Importing an external dependency
