@@ -20,7 +20,7 @@ databases the proyect will use MongoBD Technology, for template engine we will u
 
 4. Adding Babel
 
-5. Updating to ES6 (https://github.com/JoseLara55/projnotes-2023a-class/blob/main/Class%20notes/Updating%20to%20ES6.md)
+5. [Updating to ES6](https://github.com/JoseLara55/projnotes-2023a-class/blob/main/Class%20notes/Updating%20to%20ES6.md)
 
 6. Build Script
 
