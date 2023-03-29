@@ -47,7 +47,7 @@ if (nodeEnviroment === 'development'){
     const bundle = webpack (webpackConfig);
 
     app.use(WebpackDevmiddlegare(bundle, {
-      publicPath: webpackConfig.output.path
+      publicPath: webpackConfig.output.PublicPath
     }));
 
     app.use(WebpackHotMiddleware(bundle));
@@ -79,7 +79,7 @@ app.use(express.urlencoded({ extended: false }));
 // Parse client Cookies into json
 app.use(cookieParser());
 //Set up the static file server
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //Registering routes
 app.use('/', indexRouter);
