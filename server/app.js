@@ -14,8 +14,46 @@ import indexRouter from '@server/routes/index'
 import usersRouter from '@server/routes/users';
 import apiRouter from '@server/routes/api';
 
+//Setting Webpack Modules
+
+import webpack from 'webpack';
+import WebpackDevmiddlegare from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+
+//Importing webpack Configuration 
+
+import webpackConfig from '../webpack.dev.config';
+
 // We are creating the express instance
 const app = express();
+
+// Get the execution mode
+
+const nodeEnviroment = process.env.NODE_ENV || 'production';
+
+// Deciding if we add  webpack middleware or not
+
+if (nodeEnviroment === 'development'){
+  //start webpack dev server
+  console.log ("🎧 Ejecutando el modo desarrollo");
+  // Adding the key
+  webpackConfig.mode = nodeEnviroment;
+
+  webpackConfig.devServer.port = process.env.PORT;
+
+  webpackConfig.entry = [
+    "webpack-hot-middleware/client?reload=true&timeout=1000", webpackConfig.entry];
+
+    const bundle = webpack (webpackConfig);
+
+    app.use(WebpackDevmiddlegare(bundle, {
+      publicPath: webpackConfig.output.PublicPath
+    }));
+
+    app.use(WebpackHotMiddleware(bundle));
+}else{
+  console.log("👘 Ejecutando modo produccion");
+}
 
 // view engine setup
 // We are declaring the localization of the views
@@ -41,7 +79,7 @@ app.use(express.urlencoded({ extended: false }));
 // Parse client Cookies into json
 app.use(cookieParser());
 //Set up the static file server
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //Registering routes
 app.use('/', indexRouter);

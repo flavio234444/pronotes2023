@@ -4,8 +4,9 @@
 
 // Importing an file routing manager
 const path = require('path');
-// Importing plugin
+// Importing Extract Plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESlintPligin = require ("eslint-webpack-plugin");
 
 // We export a configuration object
 // that will be used by webpack
@@ -22,7 +23,19 @@ module.exports = {
     // of the project's static files
     path: path.resolve(__dirname, "public"),
     // 2.2 Output file name
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: '/'
+  },
+  // 3. Configuring the development server
+  // The development server serves the packaged files
+  // to avoid having to repack on each code change.
+  devServer: {
+    // 3.1 Static files folder
+    static: path.join(__dirname, "public"),
+    // 3.2 Development server port
+    port: 8080,
+    // 3.3 Defining the host
+    host: "0.0.0.0"
   },
    // Adding a module to webpack
    module: {
@@ -53,13 +66,17 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
+       test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
-  },
-  plugins: [new MiniCssExtractPlugin({
-    // Archivo css de salida
-    filename: 'styles/app.css'
-  })]
+        },
+              plugins: [
+                new MiniCssExtractPlugin({
+                  // Archivo css de salida
+                 filename: 'styles/app.css'
+              }
+              ),
+              new ESlintPligin()
+            ]                
 }
