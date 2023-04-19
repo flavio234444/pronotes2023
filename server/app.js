@@ -7,7 +7,7 @@ import path from 'path';
 
 import cookieParser from 'cookie-parser';
 // Library to log http communication
-import logger from 'morgan'
+import morgan from 'morgan'
 
 //Importing subroutes
 import indexRouter from '@server/routes/index'
@@ -63,7 +63,7 @@ app.set('view engine', 'hbs');
 
 //Registering midlewares
 //Log all received requests
-app.use(logger('dev'));
+app.use(morgan('dev'));
 /*app.use((req, res, next)=>{
   console.log("👙We have receivend a request(Se ha recibido una petición)");
   next();
