@@ -106,3 +106,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+#ignorando los archivos ded los logs
+logs
+*.logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*

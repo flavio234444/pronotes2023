@@ -7,7 +7,7 @@ import path from 'path';
 
 import cookieParser from 'cookie-parser';
 // Library to log http communication
-import logger from 'morgan';
+import morgan from 'morgan';
 
 // Importing subroutes
 import indexRouter from '@server/routes/index';
@@ -23,6 +23,9 @@ import WebpackHotMiddleware from 'webpack-hot-middleware';
 // Importing webpack Configuration
 
 import webpackConfig from '../webpack.dev.config';
+
+// Impornting winston logger
+import winston from './config/winston';
 
 // We are creating the express instance
 const app = express();
@@ -65,17 +68,9 @@ app.set('views', path.join(__dirname, 'views'));
 // Setting up the template engine
 app.set('view engine', 'hbs');
 
-// Registering midlewares
-// Log all received requests
-app.use(logger('dev'));
-/* app.use((req, res, next)=>{
-  console.log("👙We have receivend a request(Se ha recibido una petición)");
-  next();
-});
-app.use((req, res, next)=>{
-  console.log(`😞IP: ${req.ip}`);
-  console.log(`🎮METHOD: ${req.method}`);
-}); */
+//Registering midlewares
+//Log all received requests
+app.use(morgan('combined', { stream : winston.stream }));
 // Parse request data into jason
 app.use(express.json());
 // Decode url info

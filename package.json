@@ -15,16 +15,18 @@
     "lint:s": "eslint ./server/**/*.js"
   },
   "dependencies": {
+    "app-root-path": "^3.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "^4.18.2",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "webpack": "^5.76.2",
+    "support-colors": "^0.0.1-security",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-middleware": "^6.0.2",
     "webpack-hot-middleware": "^2.25.3",
-    "support-colors": "^0.0.1-security"
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -45,9 +47,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-webpack-plugin": "^4.0.0",
     "mini-css-extract-plugin": "^2.7.5",
-    "prettier": "^2.8.7",
-    "webpack-cli": "^5.0.1",
+    "webpack": "^5.76.2",
     "webpack-dev-server": "^4.11.1"
-    
   }
 }
