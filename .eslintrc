@@ -1,6 +1,6 @@
 {
     "parser": "@babel/eslint-parser",
-    "extends":["airbnb-base"],
+    "extends":["airbnb-base", "prettier"],
     "rules":{
         "no-console":"off"
       },
@@ -8,5 +8,8 @@
       "es6": true,
       "node": true,
       "browser": true
+    },
+    "globals":{
+      "__rootdir":"readonly"
     }
   }
