@@ -12,7 +12,8 @@
     "clean": "rm -rf ./dist",
     "cleanc": "rm -f ./public/bundle.js ./public/styles/app.css",
     "lint:c": "eslint ./client/**/*.js",
-    "lint:s": "eslint ./server/**/*.js"
+    "lint:s": "eslint ./server/**/*.js",
+    "clean:logs": "rm -rf ./server/logs/*.log"
   },
   "dependencies": {
     "app-root-path": "^3.1.0",
@@ -39,7 +40,7 @@
     "babel-watch": "^7.7.2",
     "core-js": "^3.29.1",
     "css-loader": "^6.7.3",
-    "eslint": "^8.38.0",
+    "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-babel-module": "^5.3.2",

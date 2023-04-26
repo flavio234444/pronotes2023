@@ -14,6 +14,9 @@ const debug = Debug('projnotes')
 //Modulo que permite la comunicación con cliente via el protocolo HTTP
 import http from 'http';
 
+// Impornting winston logger
+import log from '../config/winston';
+
 /**
  * Get port from environment and store in Express.
  */
@@ -25,7 +28,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+log.info('The server is created from the express instance');
 const server = http.createServer(app); //(entradas)req, res)(acciones en ejecucion)=> {acciones}
 
 /**
@@ -66,19 +69,15 @@ function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
+      log.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
+      log.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -92,8 +91,6 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
-  debug(`🎃 Listening on   ${process.env.APP_URL}:${addr.port} 🧨🎇`);
+  log.info(`⭐⭐ Listening on ${process.env.APP_URL}:${addr.port} ⭐⭐`);
 }
+
