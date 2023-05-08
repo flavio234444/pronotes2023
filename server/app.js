@@ -14,15 +14,21 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
 // Importing subroutes
-import indexRouter from '@server/routes/index';
-import usersRouter from '@server/routes/users';
-import apiRouter from '@server/routes/api';
+// import indexRouter from '@server/routes/index';
+// import usersRouter from '@server/routes/users';
+// import apiRouter from '@server/routes/api';
+
+// Importando enrutador
+import router from './router';
 
 // Setting Webpack Modules
 
 import webpack from 'webpack';
 import WebpackDevmiddlegare from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
+
+//importando el onfigurador de mootor de plantillas 
+import configTemplateEngine from './config/templateEngine';
 
 // Importing webpack Configuration
 
@@ -66,11 +72,9 @@ if (nodeEnviroment === 'development') {
   console.log('👘 Ejecutando modo produccion');
 }
 
-// view engine setup
-// We are declaring the localization of the views
-app.set('views', path.join(__dirname, 'views'));
-// Setting up the template engine
-app.set('view engine', 'hbs');
+
+// View Engine Setup
+configTemplateEngine(app);
 
 //Registering midlewares
 //Log all received requests
@@ -85,9 +89,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Registering routes
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api', apiRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+// app.use('/api', apiRouter);
+
+router.addRoutes(app);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
