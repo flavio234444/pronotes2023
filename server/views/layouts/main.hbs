@@ -2,14 +2,15 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/styles/app.css' />
     <link rel="shortcut icon" href="/1.png" type="image/png">
-     <script src="/bundle.js" defer></script>
-    
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' href='/styles/app.css' />
+    <script src="/bundle.js" defer></script>
   </head>
   <body>
     {{!-- Llamando a la vista parcial de la barra de navegacion --}}
-  {{> _navbar }}
+    {{> _navbar }}
+
     <div class="container">
       {{{body}}}
     </div>

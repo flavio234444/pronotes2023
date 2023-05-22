@@ -59,6 +59,8 @@ if (nodeEnviroment === 'development') {
     webpackConfig.entry,
   ];
 
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
   const bundle = webpack(webpackConfig);
 
   app.use(
