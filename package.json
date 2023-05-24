@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production PORT=3000 APP_URL='http://localhost' DEBUG=projnotes node ./dist/bin/www",
-    "dev": "NODE_ENV=development PORT=3000 APP_URL='http://localhost' DEBUG=projnotes babel-watch --watch ./server/views ./server/bin/www",
+    "start": "NODE_ENV=production  DEBUG=projnotes node ./dist/bin/www",
+    "dev": "NODE_ENV=development  DEBUG=projnotes babel-watch --watch ./server/views ./server/bin/www",
     "devc": "NODE_ENV=development webpack serve --config ./webpack.dev.config.js --mode development",
     "build": "npm run buildc && npm run builds",
     "builds": "npm run clean && babel ./server --out-dir dist --copy-files",
@@ -19,6 +19,7 @@
     "app-root-path": "^3.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^7.0.7",
     "http-errors": "~1.6.3",

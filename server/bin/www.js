@@ -17,13 +17,16 @@ import http from 'http';
 // Impornting winston logger
 import log from '../config/winston';
 
+// Importing config Keys
+import configKeys from '../config/configKeys';
+
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(configKeys.port);
 //Store the port info in the app 
-app.set('port', port);
+// app.set('port', port);
 
 /**
  * Create HTTP server.
