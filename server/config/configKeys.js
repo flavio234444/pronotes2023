@@ -7,10 +7,18 @@ import dotenv from 'dotenv';
 // carga falla de manera silenciosa
 dotenv.config();
 
+// Configuracion para desarollo
+const devConfig = {
+  env: 'development',
+  debug: process.env.DEBUG,
+};
+
+
 // Crearemos un objeto que contendra
 // las llaves de configuración
 export default {
   homeUrl: `${process.env.APP_URL}:${process.env.PORT}`,
+  mongoUrl: process.env.DEV_DATABASE_URL,
   port: process.env.PORT || '3000',
   ip: process.env.IP,
 };
