@@ -11,16 +11,16 @@ const projectSchema = Yup.object().shape({
 
 // Creando el extractor de datos de la petición
 const getProject = (req) => {
-    // Extrayendo datos de la petición
-    const { name, description } = req.body;
-    // Regresando el objeto proyecto
-    return {
-      name,
-      description,
-    };
+  // Extrayendo datos de la petición
+  const { name, description } = req.body;
+  // Regresando el objeto proyecto
+  return {
+    name,
+    description,
   };
+};
 
-  export default {
-    projectSchema,
-    getProject,
-  };
+export default {
+  projectSchema,
+  getProject,
+};

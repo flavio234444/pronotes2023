@@ -12,8 +12,6 @@ import projectValidator from './project.validator';
 // Creando una isntancia del enrutador
 const router = new Router();
 
-
-
 // Enrutamos
 // GET "/project"
 router.get('/', projectController.showDashboard);
@@ -23,13 +21,13 @@ router.get('/add', projectController.add);
 
 // POST "/project/add"
 router.post(
-    '/add',
-    ValidateFactory({
-      schema: projectValidator.projectSchema,
-      getObject: projectValidator.getProject,
-    }),
-    projectController.addPost,
-  );
-  
+  '/add',
+  ValidateFactory({
+    schema: projectValidator.projectSchema,
+    getObject: projectValidator.getProject,
+  }),
+  projectController.addPost
+);
+
 // Exporto este tramo de ruta
 export default router;

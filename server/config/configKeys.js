@@ -12,7 +12,7 @@ dotenv.config();
 export default {
   appVersion: process.env.APP_VERSION,
   homeUrl: `${process.env.APP_URL}:${process.env.PORT}`,
-  port: process.env.PORT || '3000',
+  port: process.env.PORT || '3030',
   ip: process.env.IP,
   mongoUrl: process.env.DEV_DATABASE_URL,
 };

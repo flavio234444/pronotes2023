@@ -2,8 +2,6 @@ import createError from 'http-errors';
 
 // Creando variable del directorio raiz
 // eslint-disable-next-line
-global["__rootdir"] = path.resolve(process.cwd());
-
 // import the express library
 import express from 'express';
 
@@ -13,21 +11,15 @@ import cookieParser from 'cookie-parser';
 // Library to log http communication
 import morgan from 'morgan';
 
-// Importing subroutes
-// import indexRouter from '@server/routes/index';
-// import usersRouter from '@server/routes/users';
-// import apiRouter from '@server/routes/api';
-
-// Importando enrutador
-import router from './router';
+// importando el onfigurador de mootor de plantillas
 
 // Setting Webpack Modules
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
 import WebpackDevmiddlegare from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 
-//importando el onfigurador de mootor de plantillas 
 import configTemplateEngine from './config/templateEngine';
 
 // Importing webpack Configuration
@@ -36,6 +28,9 @@ import webpackConfig from '../webpack.dev.config';
 
 // Impornting winston logger
 import log from './config/winston';
+
+// Importando enrutador
+import router from './router';
 
 // We are creating the express instance
 const app = express();
@@ -74,13 +69,12 @@ if (nodeEnviroment === 'development') {
   console.log('👘 Ejecutando modo produccion');
 }
 
-
 // View Engine Setup
 configTemplateEngine(app);
 
-//Registering midlewares
-//Log all received requests
-app.use(morgan('combined', { stream : log.stream }));
+// Registering midlewares
+// Log all received requests
+app.use(morgan('combined', { stream: log.stream }));
 // Parse request data into jason
 app.use(express.json());
 // Decode url info
@@ -90,13 +84,7 @@ app.use(cookieParser());
 // Set up the static file server
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Registering routes
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-// app.use('/api', apiRouter);
-
 router.addRoutes(app);
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -105,7 +93,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -1,17 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-//Se importa en app la logica del servidor (Importing the server logic)
-//require importa codigo de otro archivo (is used )
-import app from '../app';
-//Se esta importando una dependecia externa (debug) 
-//Manda mensajes como una dependencia externa
-//Importing an external dependency
-import Debug from 'debug';
-const debug = Debug('projnotes')
-//Modulo que permite la comunicación con cliente via el protocolo HTTP
+// usign HTTP protocol
 import http from 'http';
 
 // Impornting winston logger
@@ -22,39 +11,12 @@ import configKeys from '../config/configKeys';
 
 // Importing ODM
 import MongooseOdm from '../services/odm';
-/**
- * Get port from environment and store in Express.
- */
 
-const port = normalizePort(configKeys.port);
-//Store the port info in the app 
-// app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-log.info('The server is created from the express instance');
-const server = http.createServer(app); //(entradas)req, res)(acciones en ejecucion)=> {acciones}
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-// especifying the port where the server 
-server.listen(port);
-//attaching callbacks to events 
-server.on('error', onError);
-
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-
+// Normalize a port into a number, string, or false.
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     // named pipe
     return val;
   }
@@ -67,10 +29,10 @@ function normalizePort(val) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
+// Get port from environment and store in Express.
+const port = normalizePort(configKeys.port);
 
+// Event listener for HTTP server "error" event.
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -94,7 +56,7 @@ function onError(error) {
 // Rutina de arranque del servidor
 function startServer(dbConnection) {
   import('../app').then((module) => {
-		// Importa el modulo por defecto
+    // Importa el modulo por defecto
     const app = module.default;
     // Store the port info in the app
     app.set('port', port);
@@ -130,20 +92,9 @@ function startServer(dbConnection) {
       log.info(
         `🛢️ Conexión exitosa a la base de datos: ${configKeys.mongoUrl} 🛢️`,
       );
-			// Iniciando el servidor
       startServer(dbConnection);
     }
   } catch (error) {
     log.error(`Error www.js ln 103: ${error.message}`);
   }
 })();
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  const addr = server.address();
-  log.info(`⭐⭐ Listening on ${process.env.APP_URL}:${addr.port} ⭐⭐`);
-}
-
