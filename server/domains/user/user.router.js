@@ -10,11 +10,10 @@ const router = new Router();
 // Enrutamos
 // GET '/user/login'
 router.get('/login', userController.login);
-
-// GET '/user/logout'
+// GET '/user/home'
 router.get('/logout', userController.logout);
-
-// GET '/user/register'
+// GET '/user/register
 router.get('/register', userController.register);
+
 // Exporto este tramo de ruta
 export default router;

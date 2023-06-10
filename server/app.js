@@ -1,30 +1,29 @@
+// const createError = require('http-errors');
 import createError from 'http-errors';
-
-// Creando variable del directorio raiz
-// eslint-disable-next-line
-// import the express library
+// const express = require('express');
 import express from 'express';
-
+// Enable post and delete verbs
+import methodOverride from 'method-override';
+// const path = require('path');
 import path from 'path';
-
+// const cookieParser = require('cookie-parser');
 import cookieParser from 'cookie-parser';
-// Library to log http communication
+// const logger = require('morgan');
 import morgan from 'morgan';
 
-// importando el onfigurador de mootor de plantillas
-
-// Setting Webpack Modules
-
-// eslint-disable-next-line import/no-extraneous-dependencies
+// Settig webpack modules
 import webpack from 'webpack';
-import WebpackDevmiddlegare from 'webpack-dev-middleware';
-import WebpackHotMiddleware from 'webpack-hot-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
+// Importando el configurador del motor de plantillas
 import configTemplateEngine from './config/templateEngine';
 
-// Importing webpack Configuration
-
+// Importing webpack configuration
 import webpackConfig from '../webpack.dev.config';
+
+// Importando configurador de sesiones
+import configSession from './config/configSessions';
 
 // Impornting winston logger
 import log from './config/winston';
@@ -32,56 +31,62 @@ import log from './config/winston';
 // Importando enrutador
 import router from './router';
 
-// We are creating the express instance
+// Creando variable del directorio raiz
+// eslint-disable-next-line
+global["__rootdir"] = path.resolve(process.cwd());
+
 const app = express();
 
 // Get the execution mode
-
 const nodeEnviroment = process.env.NODE_ENV || 'production';
 
-// Deciding if we add  webpack middleware or not
-
+// Deciding if we add webpack middleware or not
 if (nodeEnviroment === 'development') {
-  // start webpack dev server
-  console.log('🎧 Ejecutando el modo desarrollo');
-  // Adding the key
+  console.log('🍔 Ejecutando en modo desarrollo 🍔');
+  // Adding the key "mode" with its value "developement"
   webpackConfig.mode = nodeEnviroment;
-
+  // Setting the port
   webpackConfig.devServer.port = process.env.PORT;
-
+  // Setting up the HMR(Hot module replacement)
   webpackConfig.entry = [
     'webpack-hot-middleware/client?reload=true&timeout=1000',
     webpackConfig.entry,
   ];
-
+  // Agregar el plugin a la configuración de desarrollo
+  // de webpack
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
+  // Creating the bundler
   const bundle = webpack(webpackConfig);
-
+  // Enabling the webpack middleware
   app.use(
-    WebpackDevmiddlegare(bundle, {
-      publicPath: webpackConfig.output.PublicPath,
+    webpackDevMiddleware(bundle, {
+      publicPath: webpackConfig.output.publicPath,
     })
   );
-
-  app.use(WebpackHotMiddleware(bundle));
+  // Enabling the webpack HRM
+  app.use(webpackHotMiddleware(bundle));
 } else {
-  console.log('👘 Ejecutando modo produccion');
+  console.log('🍔 Ejecutando en modo producción 🍔');
 }
 
-// View Engine Setup
+// 🎈view engine setup🎈
 configTemplateEngine(app);
 
-// Registering midlewares
+// Registrando middlewares
 // Log all received requests
 app.use(morgan('combined', { stream: log.stream }));
-// Parse request data into jason
+
+// Parse request data into json
 app.use(express.json());
 // Decode url info
 app.use(express.urlencoded({ extended: false }));
-// Parse client Cookies into json
+// Parse client cookies info json
 app.use(cookieParser());
-// Set up the static file server
+// Enable post and delete verbs
+app.use(methodOverride('_method'));
+// Habilitando manejo de sesiones y mensajes flash
+configSession(app);
+// Set up the static files server
 app.use(express.static(path.join(__dirname, '../public')));
 
 router.addRoutes(app);
@@ -103,5 +108,7 @@ app.use((err, req, res) => {
   log.error(`${err.status || 500} - ${err.message}`);
   res.render('error');
 });
+
+// module.exports = app;
 
 export default app;

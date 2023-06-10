@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // usign HTTP protocol
 import http from 'http';
 
@@ -12,7 +10,12 @@ import configKeys from '../config/configKeys';
 // Importing ODM
 import MongooseOdm from '../services/odm';
 
-// Normalize a port into a number, string, or false.
+// const debug = Debug('projnotes');
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
@@ -29,10 +32,16 @@ function normalizePort(val) {
   return false;
 }
 
-// Get port from environment and store in Express.
+/**
+ * Get port from environment and store in Express.
+ */
+
 const port = normalizePort(configKeys.port);
 
-// Event listener for HTTP server "error" event.
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -52,7 +61,6 @@ function onError(error) {
       throw error;
   }
 }
-
 // Rutina de arranque del servidor
 function startServer(dbConnection) {
   import('../app').then((module) => {
@@ -90,8 +98,9 @@ function startServer(dbConnection) {
     const dbConnection = await mongooseOdm.connect();
     if (dbConnection) {
       log.info(
-        `🛢️ Conexión exitosa a la base de datos: ${configKeys.mongoUrl} 🛢️`,
+        `🛢️ Conexión exitosa a la base de datos: ${configKeys.mongoUrl} 🛢️`
       );
+      // Iniciando el servidor
       startServer(dbConnection);
     }
   } catch (error) {

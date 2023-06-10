@@ -20,7 +20,7 @@ class MongooseOdm {
     } catch (error) {
       log.error('OCURRIO ERROR');
       throw new Error(
-        `🥀 No se pudo establecer conexión a la base de datos debido a: ${error.message} 🥀`,
+        `🥀 No se pudo establecer conexión a la base de datos debido a: ${error.message} 🥀`
       );
     }
   }

@@ -6,29 +6,22 @@
 const path = require('path');
 // Importing Extract Plugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ESlintPligin = require ("eslint-webpack-plugin");
+const EslintPlugin = require("eslint-webpack-plugin");
 
 // We export a configuration object
 // that will be used by webpack
 module.exports = {
-  // 1. The entry file from which
-  // it will contain all the definitions to package
+  // 1. The entry file or indexer
   entry: "./client/index.js",
   // 2. Specify the output file
-  // Here it is detailed where the file will be
-  // final packaged.
   output: {
     // 2.1 Absolute output path
-    // Note that it is being placed in the directory
-    // of the project's static files
     path: path.resolve(__dirname, "public"),
     // 2.2 Output file name
     filename: "bundle.js",
     publicPath: '/'
   },
   // 3. Configuring the development server
-  // The development server serves the packaged files
-  // to avoid having to repack on each code change.
   devServer: {
     // 3.1 Static files folder
     static: path.join(__dirname, "public"),
@@ -37,14 +30,11 @@ module.exports = {
     // 3.3 Defining the host
     host: "0.0.0.0"
   },
-   // Adding a module to webpack
-   module: {
+  // Adding a module to webpack
+  module: {
     rules: [
       {
-				// This section stablishes 
-				// what rules to apply to ".js" files
         test: /\.js$/,
-				// We Dont want to transpile any kind of modules
         exclude: /(node_modules|bower_components)/,
         use: [
           {
@@ -56,7 +46,7 @@ module.exports = {
                   {
                     'modules': false,
                     'useBuiltIns': 'usage',
-                    'targets': {"chrome": "80"},
+                    'targets': {"chrome": "80"},//'> 0.25%, not dead',
                     'corejs': 3
                   }
                 ]
@@ -64,19 +54,17 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-       test: /\.css$/,
+      }, {
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
-        },
-              plugins: [
-                new MiniCssExtractPlugin({
-                  // Archivo css de salida
-                 filename: 'styles/app.css'
-              }
-              ),
-              new ESlintPligin()
-            ]                
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Archivo css de salida
+      filename: 'styles/app.css'
+  }), 
+  new EslintPlugin()
+]
 }

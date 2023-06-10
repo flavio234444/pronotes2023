@@ -24,8 +24,8 @@ module.exports = {
     // 2.2 Output file name
     filename: "bundle.js"
   },
-   // Adding a module to webpack
-   module: {
+  // Adding a module to webpack
+  module: {
     rules: [
       {
 				// This section stablishes 
@@ -61,5 +61,4 @@ module.exports = {
   plugins: [new MiniCssExtractPlugin({
     // Archivo css de salida
     filename: 'styles/app.css'
-  })]
-}
+  })]}
